@@ -1,0 +1,46 @@
+name: A Basic Workflow
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+  build-db:
+
+    runs-on: windows-latest
+    steps:
+      - run: echo "Hello Windows"
+
+  build-api-app:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - run: echo "Hello Windows"
+
+  packa:
+    needs: [build, build-api-app]
+    runs-on: macos-latest
+    steps:
+      - run: echo "Hello MacOS"
+
+
+
