@@ -3,7 +3,6 @@ name: Set GITHUB_ENV var Demo
 on: workflow_dispatch
 
 jobs:
-
   custom_GITHUB_ENV:
     runs-on: ubuntu-latest
     steps:
@@ -15,4 +14,4 @@ jobs:
       - name: Use the value
         id: step_two
         run: |
-          echo "${{ env.action_state }" 
+          echo "${{ env.action_state }}"
