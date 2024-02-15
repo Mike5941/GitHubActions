@@ -1,8 +1,6 @@
-name: A Basic Workflow
+name: Custom Env Variables
 
-# Controls when the workflow will run
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 env:
   DAY_OF_WEEK: Funday
