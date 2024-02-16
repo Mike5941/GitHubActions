@@ -1,0 +1,26 @@
+name: 'Passing Values to Next Jobs'
+
+on: workflow_dispatch
+
+jobs:
+  setup-and-capture-values:
+    runs-on: ubuntu-latest
+    outputs:
+      important_value_1: ${{ steps.capture_value_1.outputs.test }}
+      important_value_2: ${{ steps.capture_value_2.outputs.test }}
+    steps:
+      - id: capture_value_1
+        run: echo "test=ImportantValue1" >> $GITHUB_OUTPUT
+
+      - id: capture_value_2
+        run: echo "test=ImportantValue2" >> $GITHUB_OUTPUT
+
+
+  use-captured-values:
+    runs-on: ubuntu-latest
+    needs: setup-and-capture-values
+    steps:
+      - run: |
+          echo "Printing the captured values"
+          echo Important value 1: ${{ needs.setup-and-capture-values.outputs.important_value_1}}
+          echo Important value 2: ${{ needs.setup-and-capture-values.outputs.important_value_2}}
